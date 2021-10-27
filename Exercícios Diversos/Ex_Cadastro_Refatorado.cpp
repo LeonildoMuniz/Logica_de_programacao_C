@@ -110,7 +110,7 @@ void alterar(){
 			for(i=0;i<cont;i++){
 				if(registro[i].codigo==codigo2){
 					imprimir(i);
-					c+=1;	
+					c=1;
 				}
 			}
 			if(c>0){
@@ -119,18 +119,18 @@ void alterar(){
 			while (sair!=1){
 				printf("\nDigite o titulo do projeto: ");
 				fflush(stdin);
-				gets(registro[c-1].titulo);			
+				gets(registro[c].titulo);			
 				printf("\nDigite a descrição do projeto : ");
 				fflush(stdin);
-				gets(registro[c-1].descricao);			
+				gets(registro[c].descricao);			
 				printf("\nDigite o responsavel pelo projeto : ");
 				fflush(stdin);
-				gets(registro[c-1].responsavel);			
+				gets(registro[c].responsavel);			
 				while(valida!=0 and valida!=1 and valida!=2){
 					printf("\nDigite o status do projeto \n0-Pendente\n1-Iniciado\n2-Concluido\nDigite:  ");
 					scanf("%d",&valida);	
 					if(valida>=0 and valida<=2){
-						registro[c-1].status=valida;
+						registro[c].status=valida;
 					}else{
 						system("cls");
 						printf("Status digitado invalido!\n");
