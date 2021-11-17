@@ -75,11 +75,33 @@ void triagem(){
 		printf("\nEncaminhe-se para ala de risco MEDIO");
 	}
 }
+FILE* abre_arquivo(char caminho[50],char modo[1]){
+	FILE *arquivo;
+	arquivo = fopen(caminho,modo);
+	if(arquivo==NULL){
+		printf("Não foi possivel abrir o arquivo");
+	}
+	return arquivo;
+}
+
+void fecha_arquivo(FILE *arquivo){
+	fclose(arquivo);
+}
+
 
 int main(){
 	setlocale(LC_ALL,"Portuguese");
+	FILE *arquivo;
 	cadastro_paciente();
 	coleta_sintomas();
 	triagem();
+	arquivo = fopen("atendimento.txt","a");
+	fprintf(arquivo,"\nCPF: %s\nNome: %s\nSexo: %s\nIdade: %d\nPontos: %d\n--------------------------------"
+	,paciente.cpf
+	,paciente.nome
+	,paciente.sexo
+	,paciente.idade
+	,total_pontos);
+	fclose(arquivo);
 	return 0;
 }
