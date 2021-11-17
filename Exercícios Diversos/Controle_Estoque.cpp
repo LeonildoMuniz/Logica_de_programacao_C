@@ -16,6 +16,14 @@ struct produto material[100];
 
 void cadastro(){
 	int sair=0;
+
+	FILE *arquivo;
+	arquivo = fopen("estoque.txt","a");
+	if(arquivo==NULL){
+		printf("Não foi possivel abrir o arquivo");
+		exit(1);
+	}
+
 	
 	while(sair!=1){
 		
@@ -39,9 +47,15 @@ void cadastro(){
 				scanf("%d",&sair);
 			}
 		}
+		fprintf(arquivo,"\nCodigo: %d\nDescrição: %s\nQuantidade: %.2f\nValor unitario: %.2f\nValor total: %.2f\n--------------------------------"
+		,material[cont].cod_produto
+		,material[cont].nome_produto
+		,material[cont].qtde_produto
+		,material[cont].unit_produto
+		,material[cont].vlr_total);
 		cont+=1;
-		
 	}
+	fclose(arquivo);
 }
 
 void listagem_todos(){
@@ -112,11 +126,36 @@ void altera_codigo(){
 	}
 }
 
+void ler_arquivo(){
+  FILE *arquivo;
+  char linha[100];
+  char *result;
+  int i;
+  arquivo = fopen("estoque.txt", "rt");
+  if (arquivo == NULL) 
+  {
+     printf("Problemas na abertura do arquivo\n");
+     return;
+  }
+  i = 1;
+  while (!feof(arquivo))
+  {
+      result = fgets(linha, 100, arquivo); 
+      if (result)
+	  printf("%s",linha);
+      i++;
+  }
+  fclose(arquivo);
+} 
+
+		
+
 int main(){
 	setlocale(LC_ALL,"Portuguese");
 	cadastro();
-	altera_codigo();
+	ler_arquivo();
+	//altera_codigo();
 	//listagem_todos();
-	listagem_codigo();
+	//listagem_codigo();
 	
 }
